@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Will clients subscript a term deposit ?
-subtitle: Why you'd want to go on a date with me
+subtitle: Predict if the client will subscribe a term deposit or not, using Machine Learning method
 ---
 
 
