@@ -27,7 +27,7 @@ navbar-links:
 avatar: "/assets/img/swiss_franc.jpg"
 
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
-round-avatar: false
+round-avatar: true
 
 # If you want to have an image logo in the top-left corner instead of having the title of the website,
 # then specify the following parameter
@@ -110,7 +110,7 @@ page-col: "#0085A1"
 # instead of colour
 
 navbar-img: "/assets/img/bank.jpg"
-footer-img: "/assets/img/bank.jpg"
+footer-img: "/assets/img/bank_sell.jpg"
 page-img: "/assets/img/bank.jpg"
 
 # Suggest a colour for mobile browsers to use as the browser's theme. This is only supported by a few mobile browsers.
