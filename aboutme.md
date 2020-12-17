@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Will clients subscript a term deposit ?
+cover-img:  /assets/img/bank.jpg
+thumbnail-img: /assets/img/bank.png
+share-img: /assets/img/bank.jpg
 subtitle: based on ML method
 ---
 
