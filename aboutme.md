@@ -1,7 +1,7 @@
 ---
-layout: home
+layout: post 
 title: Will clients subscript a term deposit ?
-subtitle: Why you'd want to go on a date with me
+subtitle: based on ML method
 ---
 
 ## Abstract
