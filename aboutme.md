@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: home
 title: Will clients subscript a term deposit ?
 subtitle: Why you'd want to go on a date with me
 ---
