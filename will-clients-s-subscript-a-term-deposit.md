@@ -1,16 +1,19 @@
 ---
 layout: page
 title: Will clients subscript a term deposit ?
-subtitle: Predict if the client will subscribe a term deposit or not, using Machine Learning method
+subtitle: Using machine learning methods to predict whether a client will subscribe a term deposit or not
 ---
 
+## Table of Contents
+1. Introduction
 
-## Abstract
+2. Datasets
+## 1. Introduction
 
-We propose to study the power of random forests in predicting rare events in another field. We will use a dataset recording direct marketing campaigns (bank term deposit) of a Portuguese banking institution. The subscriptions of the bank term deposit are based on phone calls, so this is a rare event. We plan to apply the random forest and logistic regression method to predict if a client will subscribe to a term deposit in the bank, and compare their predictive accuracies. Then, we will analyze the causal effects of the subscription of a term deposit from a bank. Finally, we could indicate which clients are more likely to subscribe to term deposits.
+Classic statistical models such as logistical regression are proven to perform poorly in predicting rare events like civil war onset. In the paper "Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data", the author compared the performance of random forest with three versions of logistic regression of different features and hyperparameters. The results show that random forest outperforms all the logistic regression models in terms of prediction accuracy as well as casual processes iterpretation. Therefore, it is worthwhile to expand the research to other fields to see if random forest woulc also provide more accurate predictions than logistic regression in out-of-sample data, as shown in the paper.
 
-## Research questions
-Our job aims to solve the following question.
+For this purpose, we proposed an extension project analyzing the performance of random forest on predicting rare events in marketing field. Specifically, our task is to predict whether a client will subscribe a term deposit or not based on information of the client. To achieve this, we first collect dataset from direct marketing campaign of a bank institution in Portugues and preprocess it. Since the dataset is highly imbalanced, it can be viewed as a rare event. We then apply random forest and logistic regression to make predictions and compare the results of these two methods. Concretely, we would like to adress the following research questions: 
+
 1. What is the accuracy of random forests in predicting the rare event in a new field?
 
 2. Can random forests predict the subscriptions of the bank term deposit efficiently and generally?
@@ -21,8 +24,16 @@ Our job aims to solve the following question.
 
 5. What is the most important factor affecting a client subscription to a term deposit? Which clients are more likely to subscribe to a term deposit?
 
-## datasets
--	In the project, we use the Bank Marketing Data Set from the UCI Machine Learning Repository. There are 41188 observations each with 20 features such as a client’s age, sex, and job. The observations are ordered by date (from May 2008 to November 2010). The dependent variable is ‘y’ indicating whether a client subscribes to the bank term deposit. 
+The data story is organized as follows: Firstly, we will make a short description of our datasets, and introduce the methods used in preprocessing the data...
+
+## Datasets
+
+We collect the Bank Marketing Data Set from the UCI Machine Learning Repository. The datasets is based on direct marketing campaign of a bank. Basically, the employees from the bank would make phone calls to the clients and convince them to make a term deposit with their bank. After the phone calls, the decision of the client will be noted - whether they accept the subscribtion or not, together with the information of the clients. In out datasets, there are 41188 samples in total, and each with 20 features. 
+
+
+
+
+such as a client’s age, sex, and job. The observations are ordered by date (from May 2008 to November 2010). The dependent variable is ‘y’ indicating whether a client subscribes to the bank term deposit. 
 The dataset is highly imbalanced because few people subscribe to the bank term deposit. The ratio of subscribed (‘Yes’) bank term deposit and not ('no') subscribed in the data is roughly 1:8. Besides, there are missing or unknown values such as ‘education’, ‘housing’ and ‘loan’ in the dataset because some people would not like to tell their private information to the banking representative. We will discard the rows containing missing values. 
 
 ## Data Wash
