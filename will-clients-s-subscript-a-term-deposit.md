@@ -24,17 +24,17 @@ For this purpose, we proposed an extension project analyzing the performance of 
 
 5. What is the most important factor affecting a client subscription to a term deposit? Which clients are more likely to subscribe to a term deposit?
 
-The data story is organized as follows: Firstly, we will make a short description of our datasets, and introduce the methods used in preprocessing the data...
+The data story is organized as follows: Firstly, we will make a short description of our datasets, and introduce the methods used in preprocessing the data...????????
 
-## Datasets
+## 2. Datasets
 
-We collect the Bank Marketing Data Set from the UCI Machine Learning Repository. The datasets is based on direct marketing campaign of a bank. Basically, the employees from the bank would make phone calls to the clients and convince them to make a term deposit with their bank. After the phone calls, the decision of the client will be noted - whether they accept the subscribtion or not, together with the information of the clients. In out datasets, there are 41188 samples in total, and each with 20 features. 
+We collect the Bank Marketing Data Set from the UCI Machine Learning Repository. The datasets is based on direct marketing campaign of a bank. Basically, the employees from the bank would make phone calls to the clients and convince them to make a term deposit with their bank. After the phone calls, the decision of the client will be noted - whether they accept the subscribtion or not, together with the information of the client. In out datasets, there are 41188 samples in total, and each with 20 attributes and a final decision: whether they subscribed the term deposit ("yes") or not ("no"). The attributes can be divided into the following categories:
+ - Client's personal information: Age, job, marital status, education, loan status and so on;
+ - Campaign activities: When and how to contact, the duration of the phone call;
+ - Social and economic environment data: Employment variation rate, consumer price index, consumer confidence index, euribor 3 month rate, number of employees;
+ - Other attributes: ????????
 
-
-
-
-such as a client’s age, sex, and job. The observations are ordered by date (from May 2008 to November 2010). The dependent variable is ‘y’ indicating whether a client subscribes to the bank term deposit. 
-The dataset is highly imbalanced because few people subscribe to the bank term deposit. The ratio of subscribed (‘Yes’) bank term deposit and not ('no') subscribed in the data is roughly 1:8. Besides, there are missing or unknown values such as ‘education’, ‘housing’ and ‘loan’ in the dataset because some people would not like to tell their private information to the banking representative. We will discard the rows containing missing values. 
+The dataset is highly imbalanced since only a few people would make the bank term deposit. The ratio of accepting the subscription (‘yes’) and rejecting the proposal ('no') is roughly 1:8 in the datasets. In addition, there are missing or unknown values in the datasets because some people would not like to tell their private information to the bank.
 
 ## Data Wash
 - As we can see in the dataset, there are 20 columns of information recorded. It contains information from different customers, 
