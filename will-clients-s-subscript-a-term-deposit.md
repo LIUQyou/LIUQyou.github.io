@@ -46,12 +46,12 @@ The first step is to drop redundant and useless data. To do this, we first disca
 Next, we visualize the data, analyze it and select useful features. Beforehand, just by looking at the data information, we have full reason to discard the attribute "duration" -- the duration of each phone call, since it is unpredictable before each call. Besides, the duration is highly correlated to the final decision -- the longer the duration, the higher the possibility that a client would subscirbe. Therefore, to ensure a realistic predictive model, we would discard this attribute. 
 
 Now let's take a good look at our data. We first viusalize the distribution of the result. As we can see, most of the custom (88.7%) will reject the proposal of term deposit subscription. 
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png?raw=true)
+![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png?raw=true)
 
 The next step is to visualize categorical variables. There are 10 categorical variables in total: job, marital, education, default, housing, loan, contact, month, day of week and poutcome (outcome of previous marketing campaign). We will go through them one by one and check if there is irrelevant or inappropriate feature to discard.
 
 - The first features we analyze is job. From that we can know, the tendency of subscrption has obvious difference amoung different occupancy, where blue collars are the people who are least likely to spend money on that.
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/jobs.png?raw=true)
+![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/jobs.png?raw=true)
 - Marital status is a effceting factor as well. Single are likely to subscribe bank term deposit when getting a sell call, while married person is on the contrary. 
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/marital_status.png?raw=true)
 - After analyzing all listed features, we find that 'y' depends on all the categorical varibles, and we do not need to drop any of them.
