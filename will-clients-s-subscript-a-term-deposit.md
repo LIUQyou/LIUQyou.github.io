@@ -39,18 +39,18 @@ We collect the Bank Marketing Data Set from the UCI Machine Learning Repository.
 The dataset is highly imbalanced since only a few people would make the bank term deposit. The ratio of accepting the subscription (‘yes’) and rejecting the proposal ('no') is roughly 1:8 in the datasets. In addition, there are missing or unknown values appeared in some attributes because some people would not like to tell their private information to the bank. Therefore, before we apply the statistical models, we have to preprocess the data and select useful features, which is also referred to as feature engineering.
 
 ## 3. Data Wash
-- As we can see in the dataset, there are 20 columns of information recorded. It contains information from different customers, 
-some of which are number data and some others are text data. The first step to process data is to wash data.
 ### 3.1 Data drop 
-The first step is to drop redundant and useless data. To do this, we check if there are any duplicated rows and discard them. We also check if the data contains 'null' and mark them as unknowns. 
-The next thing we do is feature selection. Beforehand, just by looking at the information, we have full reason to discard the attribute "duration" -- the duration of each phone call, since it is unpredictable before each call. Besides, the duration is highly correlated to the final decision -- the longer the duration, the higher the possibility that a client would subscirbe. Therefore, to ensure a realistic predictive model, we would discard this attribute. 
+The first step is to drop redundant and useless data. To do this, we first discard duplicated rows, and check if the data contains 'null' and mark them as unknowns. 
 
-### 1.0 Data Visualization and Selection
-- Now, we see the data is roughly processible. Therefore, let's take a good at what we want predict. The following image describing the distribution of our result. Obviously, most of custom(88.7%) will reject the proposal of salesperson.
+### 1.0 Data Visualization and Feature Selection
+Next, we visualize the data, analyze it and select useful features. Beforehand, just by looking at the data information, we have full reason to discard the attribute "duration" -- the duration of each phone call, since it is unpredictable before each call. Besides, the duration is highly correlated to the final decision -- the longer the duration, the higher the possibility that a client would subscirbe. Therefore, to ensure a realistic predictive model, we would discard this attribute. 
+
+Now let's take a good look at our data. We first viusalize the distribution of the result. As we can see, most of the custom (88.7%) will reject the proposal of term deposit subscription. 
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png?raw=true)
-- Here are the categorical variables.
-- The next step we do is to analyze the relevance of them between results. If the feature has nothing to do with the result, then we can drop it. Here goes the analysis result.
-- The first features we analyze is the jobs. From that we can know, the tendency of subscrption has obvious difference amoung different occupancy, where blue collars are the people who are least likely to spend money on that.
+
+The next step is to visualize categorical variables. There are 10 categorical variables in total: job, marital, education, default, housing, loan, contact, month, day of week and poutcome (outcome of previous marketing campaign). We will go through them one by one and check if there is irrelevant or inappropriate feature to discard.
+
+- The first features we analyze is job. From that we can know, the tendency of subscrption has obvious difference amoung different occupancy, where blue collars are the people who are least likely to spend money on that.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/jobs.png?raw=true)
 - Marital status is a effceting factor as well. Single are likely to subscribe bank term deposit when getting a sell call, while married person is on the contrary. 
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/marital_status.png?raw=true)
