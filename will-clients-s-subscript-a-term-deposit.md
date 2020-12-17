@@ -8,6 +8,8 @@ subtitle: Using machine learning methods to predict whether a client will subscr
 1. Introduction
 
 2. Datasets
+
+3. Data Wash
 ## 1. Introduction
 
 Classic statistical models such as logistical regression are proven to perform poorly in predicting rare events like civil war onset. In the paper "Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data", the author compared the performance of random forest with three versions of logistic regression of different features and hyperparameters. The results show that random forest outperforms all the logistic regression models in terms of prediction accuracy as well as casual processes iterpretation. Therefore, it is worthwhile to expand the research to other fields to see if random forest woulc also provide more accurate predictions than logistic regression in out-of-sample data, as shown in the paper.
@@ -34,13 +36,15 @@ We collect the Bank Marketing Data Set from the UCI Machine Learning Repository.
  - Social and economic environment data: Employment variation rate, consumer price index, consumer confidence index, euribor 3 month rate, number of employees;
  - Other attributes: ????????
 
-The dataset is highly imbalanced since only a few people would make the bank term deposit. The ratio of accepting the subscription (‘yes’) and rejecting the proposal ('no') is roughly 1:8 in the datasets. In addition, there are missing or unknown values in the datasets because some people would not like to tell their private information to the bank.
+The dataset is highly imbalanced since only a few people would make the bank term deposit. The ratio of accepting the subscription (‘yes’) and rejecting the proposal ('no') is roughly 1:8 in the datasets. In addition, there are missing or unknown values appeared in some attributes because some people would not like to tell their private information to the bank. Therefore, before we apply the statistical models, we have to preprocess the data and select useful features, which is also referred to as feature engineering.
 
-## Data Wash
+## 3. Data Wash
 - As we can see in the dataset, there are 20 columns of information recorded. It contains information from different customers, 
 some of which are number data and some others are text data. The first step to process data is to wash data.
-### 0.0 Data drop 
-- Before processing data, we delete the duplicated data and drop the column data with empty blank. Moreover, there is another factor we need to delete, the duration time. Due to the unknowness of call duration, we need to delete this feature before further process. After that, we have 19 features left.
+### 3.1 Data drop 
+The first step is to drop redundant and useless data. To do this, we check if there are any duplicated rows and discard them. We also check if the data contains 'null' and mark them as unknowns. 
+The next thing we do is feature selection. Beforehand, just by looking at the information, we have full reason to discard the attribute "duration" -- the duration of each phone call, since it is unpredictable before each call. Besides, the duration is highly correlated to the final decision -- the longer the duration, the higher the possibility that a client would subscirbe. Therefore, to ensure a realistic predictive model, we would discard this attribute. 
+
 ### 1.0 Data Visualization and Selection
 - Now, we see the data is roughly processible. Therefore, let's take a good at what we want predict. The following image describing the distribution of our result. Obviously, most of custom(88.7%) will reject the proposal of salesperson.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png?raw=true)
