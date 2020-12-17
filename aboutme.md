@@ -1,5 +1,5 @@
 ---
-layout: minimal
+layout: post
 title: Will clients subscript a term deposit ?
 subtitle: based on ML method
 ---
