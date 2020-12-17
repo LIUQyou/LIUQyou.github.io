@@ -51,8 +51,10 @@ Now let's take a good look at our data. We first viusalize the distribution of t
 
 The next step is to visualize categorical variables. There are 10 categorical variables in total: job, marital, education, default, housing, loan, contact, month, day of week and poutcome (outcome of previous marketing campaign). We will go through them one by one and check if there is irrelevant or inappropriate feature to discard.
 
-- The first features we analyze is job. From that we can know, the tendency of subscrption has obvious difference amoung different occupancy, where blue collars are the people who are least likely to spend money on that.
+- The first features we analyze is job. As shown in the figure (and all the other figures), the left figure is the distribution of different categories, with x-axis being the categories and y-axis being the total count. The right figure shows how likely people with this category would accept (positive values in x-axis) or reject (negative values in x-axis) the subscription. The longer the bar, the higher the possibility. For example, from the visualization of job we can see that blue-collar workers are ver unlikely to subscribe a term deposit. Conversely, people who are retired, or students, or work in admin show a tendency to make a term deposit. Interestingly, people who work in services industry are tend to reject the term deposit. 
+
 ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/jobs.png?raw=true)
+
 - Marital status is a effceting factor as well. Single are likely to subscribe bank term deposit when getting a sell call, while married person is on the contrary. 
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/marital_status.png?raw=true)
 - After analyzing all listed features, we find that 'y' depends on all the categorical varibles, and we do not need to drop any of them.
