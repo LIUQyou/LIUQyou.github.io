@@ -5,11 +5,12 @@ subtitle: Using machine learning methods to predict whether a client will subscr
 ---
 
 ## Table of Contents
-1. Introduction
+### 1. Introduction
 
-2. Datasets
+### 2. Datasets
 
-3. Data Wash
+### 3. Data Wash
+
 ## 1. Introduction
 
 Classic statistical models such as logistical regression are proven to perform poorly in predicting rare events like civil war onset. In the paper "Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data", the author compared the performance of random forest with three versions of logistic regression of different features and hyperparameters. The results show that random forest outperforms all the logistic regression models in terms of prediction accuracy as well as casual processes iterpretation. Therefore, it is worthwhile to expand the research to other fields to see if random forest woulc also provide more accurate predictions than logistic regression in out-of-sample data, as shown in the paper.
@@ -49,14 +50,33 @@ Now let's take a good look at our data. We first viusalize the distribution of t
 
 ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png?raw=true)
 
-The next step is to visualize categorical variables. There are 10 categorical variables in total: job, marital, education, default, housing, loan, contact, month, day of week and poutcome (outcome of previous marketing campaign). We will go through them one by one and check if there is irrelevant or inappropriate feature to discard.
+The next step is to visualize categorical variables. There are 10 categorical variables in total. We will choose some of them (most with unknowns), analyze the data and check if there is irrelevant or inappropriate feature to discard.
 
-- The first features we analyze is job. As shown in the figure (and all the other figures), the left figure is the distribution of different categories, with x-axis being the categories and y-axis being the total count. The right figure shows how likely people with this category would accept (positive values in x-axis) or reject (negative values in x-axis) the subscription. The longer the bar, the higher the possibility. For example, from the visualization of job we can see that blue-collar workers are ver unlikely to subscribe a term deposit. Conversely, people who are retired, or students, or work in admin show a tendency to make a term deposit. Interestingly, people who work in services industry are tend to reject the term deposit. 
+#### Job
+The first features we analyze is job. As shown in the figure (and all the other figures), the left figure is the distribution of different categories, with x-axis being the categories and y-axis being the total count. The right figure shows how likely people with this category would accept (positive values in x-axis) or reject (negative values in x-axis) the subscription. The longer the bar, the higher the possibility. For example, from the visualization of job we can see that blue-collar workers are ver unlikely to subscribe a term deposit. Conversely, people who are retired, or students, or work in admin show a tendency to make a term deposit. Interestingly, people who work in services industry are tend to reject the term deposit. In addition, we can see there is a small portion of unknowns in the job attribute, but they do not seem to affect the result.
 
 ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/jobs.png?raw=true)
 
-- Marital status is a effceting factor as well. Single are likely to subscribe bank term deposit when getting a sell call, while married person is on the contrary. 
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/marital_status.png?raw=true)
+#### Marital
+Marital status is an effceting factor as well. People who are married or have been married before tend to reject the proposal, while singles would prefer to make a subscription. Again, there are a small portion of unknowns, but they do not take too much importance.
+
+![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/marital_status.png?raw=true)
+
+#### Education
+From the distribution of education we can see that people with university degree are highly likely to make the subscription, which also make sense in real life. However, as we can see from the left figure, the proportion of unknowns is not negligible, and from the right figure we see that people with unknown education are tend to make the deposit term. This reminds us that we should deal with those unknowns carefully instead of directly discarding them.
+
+猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
+
+#### Default
+The default variable shows whether the client has credit in default or not. Unlike before, the data distribution of this attribute is highly imbalanced. The number of unknowns take a significant amount that is unlikely to ignore. Besides, people with unknowns default are highly tend to rejecting the term deposit. Therefore, the unknowns of this attribute are too unpredictable so that it could be an inference to the final prediction. After discussing, we decide to discard this attribute.
+
+猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
+
+#### Housing and Loan
+The attributes housing and loan can be analyzed together since they have similar properties. As we seen from the figures, people who have house and no loan are very likely to make a term deposit. Besides, the unknowns also take a small proportion and tendency in both attributes, but not negligible. 
+
+猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
+
 - After analyzing all listed features, we find that 'y' depends on all the categorical varibles, and we do not need to drop any of them.
 
 
