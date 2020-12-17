@@ -32,20 +32,20 @@ some of which are number data and some others are text data. The first step to p
 - Before processing data, we delete the duplicated data and drop the column data with empty blank. Moreover, there is another factor we need to delete, the duration time. Due to the unknowness of call duration, we need to delete this feature before further process. After that, we have 19 features left.
 ### 1.0 Data Visualization and Selection
 - Now, we see the data is roughly processible. Therefore, let's take a good at what we want predict. The following image describing the distribution of our result. Obviously, most of custom(88.7%) will reject the proposal of salesperson.
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png)
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png?raw=true)
 - Here are the categorical variables.
 - The next step we do is to analyze the relevance of them between results. If the feature has nothing to do with the result, then we can drop it. Here goes the analysis result.
 - The first features we analyze is the jobs. From that we can know, the tendency of subscrption has obvious difference amoung different occupancy, where blue collars are the people who are least likely to spend money on that.
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/jobs.png)
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/jobs.png?raw=true)
 - Marital status is a effceting factor as well. Single are likely to subscribe bank term deposit when getting a sell call, while married person is on the contrary. 
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/marital_status.png)
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/marital_status.png?raw=true)
 - After analyzing all listed features, we find that 'y' depends on all the categorical varibles, and we do not need to drop any of them.
 
 
 ### 2.0 unknown filling
 - Unknown data is another problem we are facing. Due to privacy sensitivity of some customers, they are unwilling to disclose more personal information, so a lot of data cannot be recorded. Therefore, there are blank information being marked as unknown. 'Unknown' category in ‘education’, ‘job’, ‘housing’, ‘loan’, ‘default’, and ‘marital’ can not help us use predictable model to determine which clients are more likely to subscribe a term deposit.
 - 这里加一个unknown的扇形图！
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
+- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png?raw=true)
 - As can be seen from the above figure, the unknown value accounts for a large proportion of the data. 
 This is an unappropriate situation we want to see. Too many unknown factors will affect the result of judgment, 
 so it is particularly important to find a reasonable method to fill in the unknown value.
@@ -84,7 +84,7 @@ bank_additional_full.loc[bank_additional_full['pdays'] == 999, 'pdays'] = 'no'
 bank_additional_full.pdays.astype("category")
 ```
 - After standrization we get the following table
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/after_standrization.png)
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/after_standrization.png?raw=true)
 
 ## Model and implementation
 - After completing data preprocessing, we set up two models based on classical logistic regression and random forest model. 
