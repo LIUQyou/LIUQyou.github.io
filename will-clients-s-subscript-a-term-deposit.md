@@ -7,62 +7,85 @@ subtitle: Predict if the client will subscribe a term deposit or not, using Mach
 
 ## Abstract
 
-We propose to study the power of random forest in predicting rare events in another field. We will use a dataset recording direct marketing campaigns (bank term deposit) of a Portuguese banking institution. The subscriptions of the bank term deposit are based on phone calls, so this is a rare event. We plan to apply random forest and logistic regression method to predict if a client will subscribe a term deposit in the bank, and compare their predictive accuracies. Then, we will analyze the causal effects in the subscription of a term deposit from a bank. Finally, we could indicate which clients are more likely to subscribe for term deposits.
+We propose to study the power of random forests in predicting rare events in another field. We will use a dataset recording direct marketing campaigns (bank term deposit) of a Portuguese banking institution. The subscriptions of the bank term deposit are based on phone calls, so this is a rare event. We plan to apply the random forest and logistic regression method to predict if a client will subscribe to a term deposit in the bank, and compare their predictive accuracies. Then, we will analyze the causal effects of the subscription of a term deposit from a bank. Finally, we could indicate which clients are more likely to subscribe to term deposits.
 
 ## Research questions
-1. What is the accuracy of random forests in predicting the rare event in a new filed?
+Our job aims to solve the following question.
+1. What is the accuracy of random forests in predicting the rare event in a new field?
 
 2. Can random forests predict the subscriptions of the bank term deposit efficiently and generally?
 
 3. To what extent does random forest outperform logistic regression method in predicting the rare events, subscription of the bank term deposit?
 
-4. Is there a causal effect of a client subscribing a bank term deposit?
+4. Is there a causal effect of a client subscribing to a bank term deposit?
 
-5. What is the most important factor affecting a client subscribe a term deposit? Which clients are more likely to subscribe a term deposit?
+5. What is the most important factor affecting a client subscription to a term deposit? Which clients are more likely to subscribe to a term deposit?
 
 ## datasets
--	Bank-additional-full.csv from “Bank Marketing Data Set” UCI machine learning repository. There are 41188 observations each with 20 features such as a client’s age, sex and job. The observations are ordered by date (from May 2008 to November 2010). The dependent variable is ‘y’ indicating whether a client subscribe the bank term deposit. 
-The dataset is highly imbalanced because few people subscribe the bank term deposit. The ratio of subscribed (‘Yes’) bank term deposit and not ('no') subscribed in the data is roughly 1:8. In addition, there are missing or unknown values such as ‘education’, ‘housing’ and ‘loan’ in the dataset because some people would not like to tell their private information to the banking representative. We will discard the rows containing missing values. 
+-	In the project, we use the Bank Marketing Data Set from the UCI Machine Learning Repository. There are 41188 observations each with 20 features such as a client’s age, sex, and job. The observations are ordered by date (from May 2008 to November 2010). The dependent variable is ‘y’ indicating whether a client subscribes to the bank term deposit. 
+The dataset is highly imbalanced because few people subscribe to the bank term deposit. The ratio of subscribed (‘Yes’) bank term deposit and not ('no') subscribed in the data is roughly 1:8. Besides, there are missing or unknown values such as ‘education’, ‘housing’ and ‘loan’ in the dataset because some people would not like to tell their private information to the banking representative. We will discard the rows containing missing values. 
 
-## Data preprocessing
+## Data Wash
 - As we can see in the dataset, there are 20 columns of information recorded. It contains information from different customers, 
 some of which are number data and some others are text data. The first step to process data is to wash data.
+### 0.0 Data drop 
+- Before processing data, we delete the duplicated data and drop the column data with empty blank. Moreover, there is another factor we need to delete, the duration time. Due to the unknowness of call duration, we need to delete this feature before further process. After that, we have 19 features left.
 ### 1.0 Data Visualization and Selection
+- Now, we see the data is roughly processible. Therefore, let's take a good at what we want predict. The following image describing the distribution of our result. Obviously, most of custom(88.7%) will reject the proposal of salesperson.
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png)
 - Here are the categorical variables.
-- The first step we do is to analyze the relevance of them between results. If the feature has nothing to do with the result, then we can drop it. Here goes the analysis result.
+- The next step we do is to analyze the relevance of them between results. If the feature has nothing to do with the result, then we can drop it. Here goes the analysis result.
+- The first features we analyze is the jobs. From that we can know, the tendency of subscrption has obvious difference amoung different occupancy, where blue collars are the people who are least likely to spend money on that.
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/jobs.png)
+- Marital status is a effceting factor as well. Single are likely to subscribe bank term deposit when getting a sell call, while married person is on the contrary. 
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/marital_status.png)
+- After analyzing all listed features, we find that 'y' depends on all the categorical varibles, and we do not need to drop any of them.
+
+
+### 2.0 unknown filling
+- Unknown data is another problem we are facing. Due to privacy sensitivity of some customers, they are unwilling to disclose more personal information, so a lot of data cannot be recorded. Therefore, there are blank information being marked as unknown. 'Unknown' category in ‘education’, ‘job’, ‘housing’, ‘loan’, ‘default’, and ‘marital’ can not help us use predictable model to determine which clients are more likely to subscribe a term deposit.
+- 这里加一个unknown的扇形图！
 - ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- From what we see above, not all the features will impact the result.
-For example, the custom's XXX will not influence their decision to subscript a new term deposit.
-While marital status is an important factor. Apparently, if a customer has already get married. He is highly likely to buy a new business product.
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- The other influence factor contains XX,XX,YY,ZZ.
-As we know, if one factor has nothing to do with the result. We can simply delete it to reduce computation complexity and avoid noise.
-We drop unnecessary features and keep the rest. Now, we get about NN features for the next step.
-### 2.0 Data Nummerize and Standardization
-- Another problem we are facing now is the features processing. 
-From the table, there are multiple text values, that can not be processed by classical data processing method.
-Therefore, we should find an appropriate method to process these kinds of data.
-The method we decide to take is to encoding. We use number value to represent the text.
-For example, the feature jobs contains NN kinds of different jobs name. 
-We decide to use number to reprent the text here.
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- Then we used the same method to process all text feature. 
-### 3.0 unknown filling
-- Unknown data is another problem we are facing. Due to privacy sensitivity of some customers, they are unwilling to disclose more personal information, so a lot of data cannot be recorded. Therefore, there are blank information being marked as unknown.
-![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
 - As can be seen from the above figure, the unknown value accounts for a large proportion of the data. 
 This is an unappropriate situation we want to see. Too many unknown factors will affect the result of judgment, 
 so it is particularly important to find a reasonable method to fill in the unknown value.
-Here, we decided to use the random forest method to predict the exact eigenvalues to fill the data.
-```py
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
+Here, we decided to use imputer to fill the missing values based on the most frequenct category in the column
 ```
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
+imp = SimpleImputer(missing_values=np.nan, strategy='most_frequent')
+for i in missing_col:
+    bank_additional_full[i] = imp.fit_transform(bank_additional_full[i].values.reshape(-1,1))
+```
+
+### 3.0 Data Standardization and  Nummerize 
+- The last step before going into ML filed is the features processing. 
+
+From the table, there are multiple text values, that can not be processed by classical data processing method.
+Therefore, we should find an appropriate method to process these kinds of data.
+The method we decide to take is to encoding. We use number value to represent the text.
+For example, the feature jobs contains 12 different kinds of jobs name. 
+We decide to use number to reprent the text here.
+```
+#### Label Encoder
+# Label the dependent varaible
+df['y'] = df['y'].apply(lambda x: 1 if x=="yes" else 0)
+#### Label Encoder for categorical varaibles
+cat_cols = ['job','marital','education','loan','contact','month','poutcome',"day_of_week" ,"housing",'pdays' ]
+new_df = bank_additional_full.copy()
+le = preprocessing.LabelEncoder()
+for col in cat_cols:
+    #print(col)
+    df[col] = le.fit_transform(df[col])
+```
+- Then we used the same method to process all text feature. 
+- Then we take a look at distribution of other numeric features. It is obvious that the numeric variables are not uniformly distributed. Therefore, we will standardize them. In addition, the 'pdays' variables is distributed discretely. We convert the 'pdays' to categorical variable, in which, 999 means client was not previously contacted. Therefore, we use 'no' representing 999 and 'yes' representing others.
+```
+bank_additional_full.loc[bank_additional_full['pdays'] < 30, 'pdays'] = 'yes'
+bank_additional_full.loc[bank_additional_full['pdays'] == 999, 'pdays'] = 'no'
+bank_additional_full.pdays.astype("category")
+```
+- After standrization we get the following table
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/after_standrization.png)
+
 ## Model and implementation
 - After completing data preprocessing, we set up two models based on classical logistic regression and random forest model. 
 Then we input features as input and whether they buy products as y. 
