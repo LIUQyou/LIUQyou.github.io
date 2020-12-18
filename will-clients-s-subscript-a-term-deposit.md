@@ -13,8 +13,10 @@ subtitle: Using machine learning methods to predict whether a client will subscr
 #### 2. Datasets
 
 #### 3. Data Wash
-
-
+3.1 Data drop
+3.2 Data Visualization and Feature Selection
+3.3 Unknown Filling
+3.4 Data Standardization
 ## 1. Introduction
 
 Classic statistical models such as logistical regression are proven to perform poorly in predicting rare events like civil war onset. In the paper "Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data", the author compared the performance of random forest with three versions of logistic regression of different features and hyperparameters. The results show that random forest outperforms all the logistic regression models in terms of prediction accuracy as well as casual processes iterpretation. Therefore, it is worthwhile to expand the research to other fields to see if random forest woulc also provide more accurate predictions than logistic regression in out-of-sample data, as shown in the paper.
@@ -82,30 +84,18 @@ The attributes housing and loan can be analyzed together since they have similar
 The most challenging part of this project is to deal with the unknowns. There are many ways to handle it. Firstly, and most easily, we can directly delete all the samples that contain the unknowns. However, as we analyzed before, those unknowns take a noteworthy part in the whole dataset, and simply discarding them would definitely have negative impact on the prediction accuracy. The second method we try is to use decision tree to predict the unknowns. But the results also do not seem ideal (since the cross validation score for predicting unknowns is only 0.3-0.5). Finally, we decide to use the function "SimpleImputer" in sklearn to replace the unknowns with the most frequent value along each coloumn. As we can see later, the performance of our statistical models is satisfactory on our processed dataset!
 
 
-### 3.0 Data Standardization and  Nummerize 
-- After filling unknown data, we ploted the distribution of data from different features.
+### 3.4 Data Standardization
 
-- From the image above, we can easily find that the distribution of these dataset are uniform. For example, the range of data age is from 15 to 80. 
-Compared with that, the data of campaign are stay within the interve 0 to 20.
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/before_standrization.png?raw=true)
-Therefore, we decide to standardize our dataset with mean of 0, and vriance of 1.
-- After standrization we get the following table
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/after_standrization.png?raw=true)
-- It worth to mention that the numeric variables 'pdays' are not continouly distributed, which can be divided into 2 categores smaller than 30 and 999. We convert the 'pdays' to categorical variable, in which, 999 means client was not previously contacted. 
-Here we handle this problme by using 'yes' and 'no' to represent its values.
-```
-bank_additional_full.loc[bank_additional_full['pdays'] < 30, 'pdays'] = 'yes'
-bank_additional_full.loc[bank_additional_full['pdays'] == 999, 'pdays'] = 'no'
-bank_additional_full.pdays.astype("category")
-```
-- Besides, another problem we need to tackle is the text values, as text values can not be processed by classical data processing method.
-Therefore, we should find an appropriate method to process these kinds of data.
-The method we decide to take is encoding. We use number value to represent the text.
-For example, the feature jobs contains 12 different kinds of jobs, then we can assign each job a value from 1 to 12. 
-We applied this method to all text values.
+After filling the unknown data, we ploted the distribution of features with numerical values: 
 
-```
-#### Label Encoder
+![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/before_standrization.png?raw=true)
+
+We can easily find that the distribution of the dataset are not uniform. For example, client's age is ranging from 15 to 90, whereas the values of "campaign" stays mostly within the interval 0 to 20. Therefore, standardization of the data is needed. In addition, the attribute "pdays" indicates the number of days that passed by after the client was last contacted from a previous campaign, and 999 means that the client was not previously contacted. For better interpretation of the data, we convert the numerical values into category by replacing all the value 999 with "no", and the rest with "yes". The result is shown below:
+
+猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
+
+
+### 3.5 Label Encoding
 # Label the dependent varaible
 df['y'] = df['y'].apply(lambda x: 1 if x=="yes" else 0)
 #### Label Encoder for categorical varaibles
