@@ -113,25 +113,25 @@ We first apply logistic regression to the data. To better compare the performanc
 ### 4.3 Random Forest
 Next, we implement a random forest algorithm to the data to see its performance. As before, we use grid search to find the best hyperparameters (in this case, the number of trees and the max depth of each tree), and use 10-fold cross-validation to make predictions. After that, the FPR and TPR score will be calculated. 
 
-### 4.4 Performance Analysis
-To analyze the performance of the models, we plot the ROC curve
-#### 1.0 ROC Curve
-- The following ROC curve is drawn according to TPR and FPR data from these two models.
+## 4. Performance Comparison and Analysis
+To analyze the performance of the models, we first plot the ROC curve to compare the 
+#### 4.1 ROC Curve
+The ROC curve is drawn according to TPR and FPR data from these two models.
 The random forest can better predict our result with an accuracy of 90%, which is 10% percent better than linear regression.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/ROC_curve.png)
 - Also, using the F1-score as the performance measure, we systematically compare the performance of Random Forests with logistic regression and L1-regularized logistic regression. In our experiments, we vary the ratio of the training set such that the percentage of the entire data used for training ranges between 0.2 and 0.8.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/F1_score.png)
 #### 2.0 Importance of variables
-- The importance of different variables is another point we want to discuss. The mean decrease in the Gini Score is the predictive accuracy lost by omitting a given predictor from the tree used to generate predictions about the class.
+The importance of different variables is another point we want to discuss. The mean decrease in the Gini Score is the predictive accuracy lost by omitting a given predictor from the tree used to generate predictions about the class.
 Therefore, we could take the decrease in mean Gini score as an important factor that could be used to describe the importance of a single variable.  
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/Feature_importance.png)
 
 #### 3.0 Result Compare
-- To understand how single variables can influence our prediction result, the partial dependence plot was used. By drawing these pictures, an intuitive story was told.
+To understand how single variables can influence our prediction result, the partial dependence plot was used. By drawing these pictures, an intuitive story was told.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/Partial_Dependence.png)
 
 ### Which factor matters
-- From what the image shows, we can know whether a salesperson would make a business depends on multiple important variables. The features including 'euribor3m', 'age', 'campaign', 'nr.employed', 'job' and 'education' are the most important. The 'euribor3m' is the strongest predictor. According to the partial dependence plot, the lower euribor 3-month rate can attract clients to subscribe to the bank term deposits. 
+From what the image shows, we can know whether a salesperson would make a business depends on multiple important variables. The features including 'euribor3m', 'age', 'campaign', 'nr.employed', 'job' and 'education' are the most important. The 'euribor3m' is the strongest predictor. According to the partial dependence plot, the lower euribor 3-month rate can attract clients to subscribe to the bank term deposits. 
 
 Then, age can also be a strong predictor. According to the distribution of age and the partial dependence plot, the youth and the elderly will be more likely to subscribe to the bank term deposits.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/old_money.jpg)
@@ -141,6 +141,6 @@ Then, age can also be a strong predictor. According to the distribution of age a
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/empbanking.jpg)
 - The 'job' and 'education' are the categorical variables. According to the distribution of the two variables, if the client's job is retired, the client is more likely to subscribe to the bank term deposits. Also, if a client has a university degree, the client is more likely to subscribe to the bank term deposits.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/Education_money.jpg)
-- According to the partial dependence plot, the categorical variables exhibit significant nonlinear relationships, so the changes of these categorical variables would not be captured by a linear logistic model. Also, the numeric variables except 'contact' present significant nonlinear relationships. Therefore, the logistic regression model provides a lower AUC score and F1 score.
+According to the partial dependence plot, the categorical variables exhibit significant nonlinear relationships, so the changes of these categorical variables would not be captured by a linear logistic model. Also, the numeric variables except 'contact' present significant nonlinear relationships. Therefore, the logistic regression model provides a lower AUC score and F1 score.
 
 
