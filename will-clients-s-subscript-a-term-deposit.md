@@ -14,11 +14,21 @@ subtitle: Using machine learning methods to predict whether a client will subscr
 
 #### 3. Data Wash
 3.1 Data drop
-3.2 Data Visualization and Feature Selection
-3.3 Unknown Filling
-3.4 Data Standardization
-#### 4. Model Implementation
 
+3.2 Data Visualization and Feature Selection
+
+3.3 Unknown Filling
+
+3.4 Data Standardization
+
+#### 4. Model Implementation
+4.1 Data Oversample
+
+4.2 Logistic Regression
+
+4.3 Random Forest
+
+4.4 Performance Analysis
 
 ## 1. Introduction
 
@@ -102,41 +112,22 @@ We can easily find that the distribution of the dataset are not uniform. For exa
 After preprocessing the data, we apply logistic regression and random forest model to the data to make predictions.
 
 ### 4.1 Data Oversample
-As we showed before, the data is highly imbalanced. Therefore, the model would tend to to predict the outcome that has the lager portion in the dataset (in this case, model will tend to predict "no"). The bank would therefore lose their potential client! To address this problem, we use SMOTE algorithm to oversample the minority class. SMOTE generates new data based on the distribution of features using K-nearest neighbor. After oversampling, the ratio between majority class (not subscribing) and minority class (subscribing) will become 4 : 1. 
+As we showed before, the data is highly imbalanced. The model would therefore tend to to predict the outcome that has the lager portion in the dataset (in this case, model will tend to predict "no"). If we directly apply this model to make prediction, the bank would be at risk of losing their potential client! To address this problem, we use SMOTE algorithm to oversample the minority class. SMOTE algorithm generates new data based on the distribution of features using K-nearest neighbor. After oversampling, the ratio between majority class (not subscribing) and minority class (subscribing) will become 4:1, which is much more balanced than the original ratio 8:1. With the help of SMOTE, the potential of logistic regression model and random forest model can be better exploited.
 
 ### 4.2 Logistic Regression
-The first model we used is logistic regression model, we used the sigmoid function as activation to process data. With the help of the sklearn library, we can easily get our prediction. In judge the performance of our model, we used 10-fold cross-validation and generate the probability as our result. 
+The first model we used is the logistic regression model, we used the sigmoid function as activation to process data. With the help of the sklearn library, we can easily get our prediction. To judge the performance of our model, we used 10-fold cross-validation and generate the probability as our result. 
 Then we calculate the FPR and TPR respectively.
-To better compare the performance of linear and unlinear model, we set different penalty parameter. Here, L1, L2 are all implemented.
-And GridSearch method is used to search best parameter for this model.
+To better compare the performance of the linear and nonlinear models, we set different penalty parameters. Here, L1, L2 are all implemented.
+And GridSearch method is used to search for the best parameter for this model.
 ### 4.3 Random Forest
 - Random forest is another method we choose to analyze our result. Due to its good performance to predict rare events, we believe Random Forest will give us a good prediction result.
 Random forests are an ensemble learning method for classification, regression, and other tasks that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean/average prediction (regression) of the individual trees. We generate about 500 trees in this model and we set the depth as 20.
-### Data Analysis and Visulization
-- After the model analysis, we get both the TPR and FPR from both models. 
+### 4.4 Performance Analysis
+- After the model analysis, we get both the TPR and FPR from both models. 
 Here goes the visualization of our model and performance.
 #### 1.0 ROC Curve
-- Here goes the ROC curve.
+- The following ROC curve is drawn according to TPR and FPR data from these two models.
+The random forest can better predict our result with an accuracy of 90%, which is 10% percent better than linear regression.
 - ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- As can be seen from roc curve, XXX.
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-#### 2.0 Importance of variables
-- Next, we decided to judge the importance of different variables. We judge the loss of accuracy by eliminating one of the elements.
-- The figure below shows the average decrease in the prediction accuracy of the first X variables selected by the random forest, called the Gini score. The Gini score is calculated as follows.
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- Then we sort the gini score of different features and draw the following picture.
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-#### 3.0 Result Compare
-- By comparing model performance from different models.
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- We can find that ***********************************
-- We think that .....
-- Therefore, we have reason to believe that ******************************.
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
-- From the feature importance and relevance with the result. We can easily find that the features like X, Y will exert a huge influence on the result prediction, where X is positively related to the result and Y is negative to that. Here, we can find that when ( Real Situation), people tend to subscript a new term deposit. If a man (real situation),...
-- Moreover, time is an effective factor as well. If the seller tries to call someone on Monday, they are highly likely to be rejected. This is in line with our feeling, after all, who would be in the mood to answer the call from a salesperson during the busiest Monday. Another interesting point is that the month will influence the performance of the salesperson. May is quite an interesting month when people get a sales call, blablablabla. In contrast, if they get a call at %%%%, they are highly likely to XXXX.
-
-
-[Link](url) and ![Image](src)
+- Also, using the F1-score as the performance measure, we systematically compare the performance of Random Forests with logistic regression and L1-regularized logistic regression. In our experiments, we vary the ratio of the training set such that the percentage of the entire data used for training ranges between 0.2 and 0.8.
+- ![Image](https://github.githubassets.com/images/icons/emoji/
