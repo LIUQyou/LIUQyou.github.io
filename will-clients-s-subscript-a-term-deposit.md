@@ -80,17 +80,16 @@ Marital status is an effceting factor as well. People who are married or have be
 #### Education
 From the distribution of education we can see that people with university degree are highly likely to make the subscription, which also make sense in real life. However, as we can see from the left figure, the proportion of unknowns is not negligible, and from the right figure we see that people with unknown education are tend to make the deposit term. This reminds us that we should deal with those unknowns carefully instead of directly discarding them.
 
-猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/education.png?raw=true)
 
 #### Default
 The default variable shows whether the client has credit in default or not. Unlike before, the data distribution of this attribute is highly imbalanced. The number of unknowns take a significant amount that is unlikely to ignore. Besides, people with unknowns default are highly tend to rejecting the term deposit. Therefore, the unknowns of this attribute are too unpredictable so that it could be an inference to the final prediction. After discussing, we decide to discard this attribute.
-
-猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/default.png?raw=true)
 
 #### Housing and Loan
 The attributes housing and loan can be analyzed together since they have similar properties. As we seen from the figures, people who have house and no loan are very likely to make a term deposit. Besides, the unknowns also take a small proportion and tendency in both attributes, but not negligible. 
-
-猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/housing.png?raw=true)
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/loan.png?raw=true)
 
 ### 3.3 Unknown Filling
 
@@ -100,13 +99,10 @@ The most challenging part of this project is to deal with the unknowns. There ar
 ### 3.4 Data Standardization
 
 After filling the unknown data, we ploted the distribution of features with numerical values: 
-
-![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/before_standrization.png?raw=true)
-
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/before_standrization.png?raw=true)
 We can easily find that the distribution of the dataset are not uniform. For example, client's age is ranging from 15 to 90, whereas the values of "campaign" stays mostly within the interval 0 to 20. Therefore, standardization of the data is needed. In addition, the attribute "pdays" indicates the number of days that passed by after the client was last contacted from a previous campaign, and 999 means that the client was not previously contacted. For better interpretation of the data, we convert the numerical values into category by replacing all the value 999 with "no", and the rest with "yes". The result is shown below:
-
-猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
-
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/after_standrization_dis.png?raw=true)
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/after_standrization.png?raw=true)
 
 ## 4. Model Implementation
 After preprocessing the data, we apply logistic regression and random forest model to the data to make predictions.
@@ -128,6 +124,29 @@ Here goes the visualization of our model and performance.
 #### 1.0 ROC Curve
 - The following ROC curve is drawn according to TPR and FPR data from these two models.
 The random forest can better predict our result with an accuracy of 90%, which is 10% percent better than linear regression.
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/ROC_curve.png)
 - Also, using the F1-score as the performance measure, we systematically compare the performance of Random Forests with logistic regression and L1-regularized logistic regression. In our experiments, we vary the ratio of the training set such that the percentage of the entire data used for training ranges between 0.2 and 0.8.
-- ![Image](https://github.githubassets.com/images/icons/emoji/
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/F1_score.png)
+#### 2.0 Importance of variables
+- The importance of different variables is another point we want to discuss. The mean decrease in the Gini Score is the predictive accuracy lost by omitting a given predictor from the tree used to generate predictions about the class.
+Therefore, we could take the decrease in mean Gini score as an important factor that could be used to describe the importance of a single variable.  
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/Feature_importance.png)
+
+#### 3.0 Result Compare
+- To understand how single variables can influence our prediction result, the partial dependence plot was used. By drawing these pictures, an intuitive story was told.
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/Partial_Dependence.png)
+
+### Which factor matters
+- From what the image shows, we can know whether a salesperson would make a business depends on multiple important variables. The features including 'euribor3m', 'age', 'campaign', 'nr.employed', 'job' and 'education' are the most important. The 'euribor3m' is the strongest predictor. According to the partial dependence plot, the lower euribor 3-month rate can attract clients to subscribe to the bank term deposits. 
+
+Then, age can also be a strong predictor. According to the distribution of age and the partial dependence plot, the youth and the elderly will be more likely to subscribe to the bank term deposits.
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/old_money.jpg)
+- The 'campaign' feature indicates that a relatively low number of contacts performed during this campaign and for this client can increase the possibility of subscribing to the bank term deposits.
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/campaign.png)
+- 'nr. employed' is the number of employees - quarterly indicator. Therefore, a low number of employees can attract clients to subscribe to bank term deposits.
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/empbanking.jpg.png)
+- The 'job' and 'education' are the categorical variables. According to the distribution of the two variables, if the client's job is retired, the client is more likely to subscribe to the bank term deposits. Also, if a client has a university degree, the client is more likely to subscribe to the bank term deposits.
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/Education_money.jpg)
+- According to the partial dependence plot, the categorical variables exhibit significant nonlinear relationships, so the changes of these categorical variables would not be captured by a linear logistic model. Also, the numeric variables except 'contact' present significant nonlinear relationships. Therefore, the logistic regression model provides a lower AUC score and F1 score.
+
+
