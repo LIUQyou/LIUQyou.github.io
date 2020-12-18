@@ -21,11 +21,11 @@ Classic statistical models such as logistical regression are proven to perform p
 
 For this purpose, we proposed an extension project analyzing the performance of random forest on predicting rare events in marketing field. Specifically, our task is to predict whether a client will subscribe a term deposit or not based on information of the client. To achieve this, we first collect dataset from direct marketing campaign of a bank institution in Portugues and preprocess it. Since the dataset is highly imbalanced, it can be viewed as a rare event. We then apply random forest and logistic regression to make predictions and compare the results of these two methods. Concretely, we would like to adress the following research questions: 
 
-1. What is the accuracy of random forests in predicting the rare event in a new field?
-2. Can random forests predict the subscriptions of the bank term deposit efficiently and generally?
-3. To what extent does random forest outperform logistic regression method in predicting the rare events, subscription of the bank term deposit?
-4. Is there a causal effect of a client subscribing to a bank term deposit?
-5. What is the most important factor affecting a client subscription to a term deposit? Which clients are more likely to subscribe to a term deposit?
+- What is the accuracy of random forests in predicting the rare event in a new field?
+- Can random forests predict the subscriptions of the bank term deposit efficiently and generally?
+- To what extent does random forest outperform logistic regression method in predicting the rare events, subscription of the bank term deposit?
+- Is there a causal effect of a client subscribing to a bank term deposit?
+- What is the most important factor affecting a client subscription to a term deposit? Which clients are more likely to subscribe to a term deposit?
 
 The data story is organized as follows: Firstly, we will make a short description of our datasets, and introduce the methods used in preprocessing the data...????????
 
