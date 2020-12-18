@@ -79,17 +79,31 @@ The attributes housing and loan can be analyzed together since they have similar
 
 ### 3.3 Unknown Filling
 
-The most challenging part of this project is to deal with the unknowns. There are many ways to handle it. Firstly, and most easily, we can directly delete all the samples that contain the unknowns. However, as we analyzed before, those unknowns take a noteworthy part in the whole dataset, and simply discarding them would definitely have negative impact on the prediction accuracy. The second method we try is to use decision tree to predict the unknowns. But the results also do not seem ideal (since the cross validation score for predicting unknowns is only 0.3-0.5). Finally, we decide to use the function "SimpleImputer" in sklearn to replace the unknowns with the most frequent value along each coloumn. 
+The most challenging part of this project is to deal with the unknowns. There are many ways to handle it. Firstly, and most easily, we can directly delete all the samples that contain the unknowns. However, as we analyzed before, those unknowns take a noteworthy part in the whole dataset, and simply discarding them would definitely have negative impact on the prediction accuracy. The second method we try is to use decision tree to predict the unknowns. But the results also do not seem ideal (since the cross validation score for predicting unknowns is only 0.3-0.5). Finally, we decide to use the function "SimpleImputer" in sklearn to replace the unknowns with the most frequent value along each coloumn. As we can see later, the performance of our statistical models is satisfactory on our processed dataset!
 
 
 ### 3.0 Data Standardization and  Nummerize 
-- The last step before going into ML filed is the features processing. 
+- After filling unknown data, we ploted the distribution of data from different features.
 
-From the table, there are multiple text values, that can not be processed by classical data processing method.
+- From the image above, we can easily find that the distribution of these dataset are uniform. For example, the range of data age is from 15 to 80. 
+Compared with that, the data of campaign are stay within the interve 0 to 20.
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/before_standrization.png?raw=true)
+Therefore, we decide to standardize our dataset with mean of 0, and vriance of 1.
+- After standrization we get the following table
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/after_standrization.png?raw=true)
+- It worth to mention that the numeric variables 'pdays' are not continouly distributed, which can be divided into 2 categores smaller than 30 and 999. We convert the 'pdays' to categorical variable, in which, 999 means client was not previously contacted. 
+Here we handle this problme by using 'yes' and 'no' to represent its values.
+```
+bank_additional_full.loc[bank_additional_full['pdays'] < 30, 'pdays'] = 'yes'
+bank_additional_full.loc[bank_additional_full['pdays'] == 999, 'pdays'] = 'no'
+bank_additional_full.pdays.astype("category")
+```
+- Besides, another problem we need to tackle is the text values, as text values can not be processed by classical data processing method.
 Therefore, we should find an appropriate method to process these kinds of data.
-The method we decide to take is to encoding. We use number value to represent the text.
-For example, the feature jobs contains 12 different kinds of jobs name. 
-We decide to use number to reprent the text here.
+The method we decide to take is encoding. We use number value to represent the text.
+For example, the feature jobs contains 12 different kinds of jobs, then we can assign each job a value from 1 to 12. 
+We applied this method to all text values.
+
 ```
 #### Label Encoder
 # Label the dependent varaible
@@ -102,15 +116,26 @@ for col in cat_cols:
     #print(col)
     df[col] = le.fit_transform(df[col])
 ```
-- Then we used the same method to process all text feature. 
-- Then we take a look at distribution of other numeric features. It is obvious that the numeric variables are not uniformly distributed. Therefore, we will standardize them. In addition, the 'pdays' variables is distributed discretely. We convert the 'pdays' to categorical variable, in which, 999 means client was not previously contacted. Therefore, we use 'no' representing 999 and 'yes' representing others.
+
+## Model and implementation
+- After completing data preprocessing, we set up two models based on classical logistic regression and random forest model. 
+Then we inport features as predictor and use y as target to indicate whether they would buy products. 
+### Data oversample
+As the distribution of y shows, there are too few people answer with yes.
+We proposed another method to handle oversample our data, the SMOTE.
+SMOTE is a Knn based algorithm, which use algorithm to extend our dataset, by generating different new data set with the distribution of features.
+We used SMOTE algorithm to oversample the minority class. Then, the ratio between majority class and minority class will be 3 : 1.
 ```
-bank_additional_full.loc[bank_additional_full['pdays'] < 30, 'pdays'] = 'yes'
-bank_additional_full.loc[bank_additional_full['pdays'] == 999, 'pdays'] = 'no'
-bank_additional_full.pdays.astype("category")
+smote = SMOTE(sampling_strategy = 0.25)
+X, y = smote.fit_sample(X, y)
 ```
-- After standrization we get the following table
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/after_standrization.png?raw=true)
+After data oversampling, the ratio of subscribed (‘no’) bank term deposit and not ('yes') subscribed in the data is roughly 4.000109481059777.
+With the help of SMOTE, the potential of logistic regression model and random forest model can be better exploied.
+### Logistic Regression
+- The first model we used is logistic regression model, we used the sigmoid function as activation to process data. With the help of the sklearn library, we can easily get our prediction. In judge the performance of our model, we used 10-fold cross-validation and generate the probability as our result. 
+Then we calculate the FPR and TPR respectively.
+To better compare the performance of linear and unlinear model, we set different penalty parameter. Here, L1, L2 are all implemented.
+And GridSearch method is used to search best parameter for this model.
 
 ## Model and implementation
 - After completing data preprocessing, we set up two models based on classical logistic regression and random forest model. 
