@@ -37,13 +37,13 @@ We collect the Bank Marketing Data Set from the UCI Machine Learning Repository.
  - Social and economic environment data: Employment variation rate, consumer price index, consumer confidence index, euribor 3 month rate, number of employees;
  - Other attributes: ????????
 
-The dataset is highly imbalanced since only a few people would make the bank term deposit. The ratio of accepting the subscription (‘yes’) and rejecting the proposal ('no') is roughly 1:8 in the datasets. In addition, there are missing or unknown values appeared in some attributes because some people would not like to tell their private information to the bank. Therefore, before we apply the statistical models, we have to preprocess the data and select useful features, which is also referred to as feature engineering.
+The dataset is highly imbalanced since only a few people would make the bank term deposit. The ratio of accepting the subscription (‘yes’) and rejecting the proposal ('no') is roughly 1:8 in the datasets. In addition, there are missing values appeared in some attributes marked with "unknown", since some people are unwilling to disclose their private information to the bank. Therefore, before we apply the statistical models, we have to preprocess the data and select useful features, which is also referred to as feature engineering.
 
 ## 3. Data Wash
 ### 3.1 Data drop 
 The first step is to drop redundant and useless data. To do this, we first discard duplicated rows, and check if the data contains 'null' and mark them as unknowns. 
 
-### 1.0 Data Visualization and Feature Selection
+### 3.2 Data Visualization and Feature Selection
 Next, we visualize the data, analyze it and select useful features. Beforehand, just by looking at the data information, we have full reason to discard the attribute "duration" -- the duration of each phone call, since it is unpredictable before each call. Besides, the duration is highly correlated to the final decision -- the longer the duration, the higher the possibility that a client would subscirbe. Therefore, to ensure a realistic predictive model, we would discard this attribute. 
 
 Now let's take a good look at our data. We first viusalize the distribution of the result. As we can see, most of the custom (88.7%) will reject the proposal of term deposit subscription. 
@@ -77,22 +77,10 @@ The attributes housing and loan can be analyzed together since they have similar
 
 猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
 
-- After analyzing all listed features, we find that 'y' depends on all the categorical varibles, and we do not need to drop any of them.
+### 3.3 Unknown Filling
 
+The most challenging part of this project is to deal with the unknowns. There are many ways to handle it. Firstly, and most easily, we can directly delete all the samples that contain the unknowns. However, as we analyzed before, those unknowns take a noteworthy part in the whole dataset, and simply discarding them would definitely have negative impact on the prediction accuracy. The second method we try is to use decision tree to predict the unknowns. But the results also do not seem ideal (since the cross validation score for predicting unknowns is only 0.3-0.5). Finally, we decide to use the function "SimpleImputer" in sklearn to replace the unknowns with the most frequent value along each coloumn. 
 
-### 2.0 unknown filling
-- Unknown data is another problem we are facing. Due to privacy sensitivity of some customers, they are unwilling to disclose more personal information, so a lot of data cannot be recorded. Therefore, there are blank information being marked as unknown. 'Unknown' category in ‘education’, ‘job’, ‘housing’, ‘loan’, ‘default’, and ‘marital’ can not help us use predictable model to determine which clients are more likely to subscribe a term deposit.
-- 这里加一个unknown的扇形图！
-- ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png?raw=true)
-- As can be seen from the above figure, the unknown value accounts for a large proportion of the data. 
-This is an unappropriate situation we want to see. Too many unknown factors will affect the result of judgment, 
-so it is particularly important to find a reasonable method to fill in the unknown value.
-Here, we decided to use imputer to fill the missing values based on the most frequenct category in the column
-```
-imp = SimpleImputer(missing_values=np.nan, strategy='most_frequent')
-for i in missing_col:
-    bank_additional_full[i] = imp.fit_transform(bank_additional_full[i].values.reshape(-1,1))
-```
 
 ### 3.0 Data Standardization and  Nummerize 
 - The last step before going into ML filed is the features processing. 
