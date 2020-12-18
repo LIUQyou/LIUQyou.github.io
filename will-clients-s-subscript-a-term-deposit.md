@@ -1,6 +1,9 @@
 ---
 layout: page
 title: Will clients subscript a term deposit ?
+cover-img:  /assets/img/bank.jpg
+thumbnail-img: /assets/img/bank.png
+share-img: /assets/img/bank.jpg
 subtitle: Using machine learning methods to predict whether a client will subscribe a term deposit or not
 ---
 
@@ -136,18 +139,12 @@ With the help of SMOTE, the potential of logistic regression model and random fo
 Then we calculate the FPR and TPR respectively.
 To better compare the performance of linear and unlinear model, we set different penalty parameter. Here, L1, L2 are all implemented.
 And GridSearch method is used to search best parameter for this model.
-
-## Model and implementation
-- After completing data preprocessing, we set up two models based on classical logistic regression and random forest model. 
-Then we input features as input and whether they buy products as y. 
-### Logistic Regression
-- Here we establish a logistic regression model, use the sigmoid function as activation to process data. With the help of the sklearn library, we can easily get our result of the prediction. In order to judge the performance of our model, we used 10-fold cross-validation and generate the probability as our result. 
-Then we calculate the FTR and TFR respectively. We get their values are and .
 ### Random Forest
 - Random forest is another method we choose to analyze our result. Due to its good performance to predict rare events, we believe Random Forest will give us a good prediction result.
-Random forests are an ensemble learning method for classification, regression, and other tasks that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean/average prediction (regression) of the individual trees. We generate about XXX trees in this model.
+Random forests are an ensemble learning method for classification, regression, and other tasks that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean/average prediction (regression) of the individual trees. We generate about 500 trees in this model and we set the depth as 20.
 ### Data Analysis and Visulization
 - After the model analysis, we get both the TPR and FPR from both models. 
+Here goes the visualization of our model and performance.
 #### 1.0 ROC Curve
 - Here goes the ROC curve.
 - ![Image](https://github.githubassets.com/images/icons/emoji/octocat.png)
@@ -173,14 +170,3 @@ Random forests are an ensemble learning method for classification, regression, a
 
 
 [Link](url) and ![Image](src)
-
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/LIUQyou/ADA_P4/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
