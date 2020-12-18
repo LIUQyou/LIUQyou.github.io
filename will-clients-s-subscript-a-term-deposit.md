@@ -144,7 +144,7 @@ Then, age can also be a strong predictor. According to the distribution of age a
 - The 'campaign' feature indicates that a relatively low number of contacts performed during this campaign and for this client can increase the possibility of subscribing to the bank term deposits.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/campaign.png)
 - 'nr. employed' is the number of employees - quarterly indicator. Therefore, a low number of employees can attract clients to subscribe to bank term deposits.
-- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/empbanking.jpg.png)
+- ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/empbanking.jpg)
 - The 'job' and 'education' are the categorical variables. According to the distribution of the two variables, if the client's job is retired, the client is more likely to subscribe to the bank term deposits. Also, if a client has a university degree, the client is more likely to subscribe to the bank term deposits.
 - ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/Education_money.jpg)
 - According to the partial dependence plot, the categorical variables exhibit significant nonlinear relationships, so the changes of these categorical variables would not be captured by a linear logistic model. Also, the numeric variables except 'contact' present significant nonlinear relationships. Therefore, the logistic regression model provides a lower AUC score and F1 score.
