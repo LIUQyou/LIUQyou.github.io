@@ -8,11 +8,12 @@ subtitle: Using machine learning methods to predict whether a client will subscr
 ---
 
 ## Table of Contents
-### 1. Introduction
+#### 1. Introduction
 
-### 2. Datasets
+#### 2. Datasets
 
-### 3. Data Wash
+#### 3. Data Wash
+
 
 ## 1. Introduction
 
