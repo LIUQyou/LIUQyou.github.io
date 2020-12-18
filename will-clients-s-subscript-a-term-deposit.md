@@ -17,6 +17,9 @@ subtitle: Using machine learning methods to predict whether a client will subscr
 3.2 Data Visualization and Feature Selection
 3.3 Unknown Filling
 3.4 Data Standardization
+#### 4. Model Implementation
+
+
 ## 1. Introduction
 
 Classic statistical models such as logistical regression are proven to perform poorly in predicting rare events like civil war onset. In the paper "Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data", the author compared the performance of random forest with three versions of logistic regression of different features and hyperparameters. The results show that random forest outperforms all the logistic regression models in terms of prediction accuracy as well as casual processes iterpretation. Therefore, it is worthwhile to expand the research to other fields to see if random forest woulc also provide more accurate predictions than logistic regression in out-of-sample data, as shown in the paper.
@@ -95,38 +98,18 @@ We can easily find that the distribution of the dataset are not uniform. For exa
 猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫猫
 
 
-### 3.5 Label Encoding
-# Label the dependent varaible
-df['y'] = df['y'].apply(lambda x: 1 if x=="yes" else 0)
-#### Label Encoder for categorical varaibles
-cat_cols = ['job','marital','education','loan','contact','month','poutcome',"day_of_week" ,"housing",'pdays' ]
-new_df = bank_additional_full.copy()
-le = preprocessing.LabelEncoder()
-for col in cat_cols:
-    #print(col)
-    df[col] = le.fit_transform(df[col])
-```
+## 4. Model Implementation
+After preprocessing the data, we apply logistic regression and random forest model to the data to make predictions.
 
-## Model and implementation
-- After completing data preprocessing, we set up two models based on classical logistic regression and random forest model. 
-Then we inport features as predictor and use y as target to indicate whether they would buy products. 
-### Data oversample
-As the distribution of y shows, there are too few people answer with yes.
-We proposed another method to handle oversample our data, the SMOTE.
-SMOTE is a Knn based algorithm, which use algorithm to extend our dataset, by generating different new data set with the distribution of features.
-We used SMOTE algorithm to oversample the minority class. Then, the ratio between majority class and minority class will be 3 : 1.
-```
-smote = SMOTE(sampling_strategy = 0.25)
-X, y = smote.fit_sample(X, y)
-```
-After data oversampling, the ratio of subscribed (‘no’) bank term deposit and not ('yes') subscribed in the data is roughly 4.000109481059777.
-With the help of SMOTE, the potential of logistic regression model and random forest model can be better exploied.
-### Logistic Regression
-- The first model we used is logistic regression model, we used the sigmoid function as activation to process data. With the help of the sklearn library, we can easily get our prediction. In judge the performance of our model, we used 10-fold cross-validation and generate the probability as our result. 
+### 4.1 Data Oversample
+As we showed before, the data is highly imbalanced. Therefore, the model would tend to to predict the outcome that has the lager portion in the dataset (in this case, model will tend to predict "no"). The bank would therefore lose their potential client! To address this problem, we use SMOTE algorithm to oversample the minority class. SMOTE generates new data based on the distribution of features using K-nearest neighbor. After oversampling, the ratio between majority class (not subscribing) and minority class (subscribing) will become 4 : 1. 
+
+### 4.2 Logistic Regression
+The first model we used is logistic regression model, we used the sigmoid function as activation to process data. With the help of the sklearn library, we can easily get our prediction. In judge the performance of our model, we used 10-fold cross-validation and generate the probability as our result. 
 Then we calculate the FPR and TPR respectively.
 To better compare the performance of linear and unlinear model, we set different penalty parameter. Here, L1, L2 are all implemented.
 And GridSearch method is used to search best parameter for this model.
-### Random Forest
+### 4.3 Random Forest
 - Random forest is another method we choose to analyze our result. Due to its good performance to predict rare events, we believe Random Forest will give us a good prediction result.
 Random forests are an ensemble learning method for classification, regression, and other tasks that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean/average prediction (regression) of the individual trees. We generate about 500 trees in this model and we set the depth as 20.
 ### Data Analysis and Visulization
