@@ -13,21 +13,16 @@ subtitle: Using machine learning methods to predict whether a client will subscr
 #### 2. Datasets
 
 #### 3. Data Wash
+
 3.1 Data drop
-
 3.2 Data Visualization and Feature Selection
-
 3.3 Unknown Filling
-
 3.4 Data Standardization
-
 #### 4. Model Implementation
+
 4.1 Data Oversample
-
 4.2 Logistic Regression
-
 4.3 Random Forest
-
 4.4 Performance Analysis
 
 ## 1. Introduction
@@ -61,7 +56,7 @@ The first step is to drop redundant and useless data. To do this, we first disca
 ### 3.2 Data Visualization and Feature Selection
 Next, we visualize the data, analyze it and select useful features. Beforehand, just by looking at the data information, we have full reason to discard the attribute "duration" -- the duration of each phone call, since it is unpredictable before each call. Besides, the duration is highly correlated to the final decision -- the longer the duration, the higher the possibility that a client would subscirbe. Therefore, to ensure a realistic predictive model, we would discard this attribute. 
 
-Now let's take a good look at our data. We first viusalize the distribution of the result. As we can see, most of the custom (88.7%) will reject the proposal of term deposit subscription. 
+Now we can start to analyze the features by visualizing the data. We first viusalize the distribution of the result. As we can see, most of the custom (88.7%) will reject the proposal of term deposit subscription. 
 
 ![Image](https://github.com/LIUQyou/LIUQyou.github.io/blob/master/assets/img/yes_no.png?raw=true)
 
@@ -108,19 +103,16 @@ After filling the unknown data, we ploted the distribution of features with nume
 After preprocessing the data, we apply logistic regression and random forest model to the data to make predictions.
 
 ### 4.1 Data Oversample
-As we showed before, the data is highly imbalanced. The model would therefore tend to to predict the outcome that has the lager portion in the dataset (in this case, model will tend to predict "no"). If we directly apply this model to make prediction, the bank would be at risk of losing their potential client! To address this problem, we use SMOTE algorithm to oversample the minority class. SMOTE algorithm generates new data based on the distribution of features using K-nearest neighbor. After oversampling, the ratio between majority class (not subscribing) and minority class (subscribing) will become 4:1, which is much more balanced than the original ratio 8:1. With the help of SMOTE, the potential of logistic regression model and random forest model can be better exploited.
+As we showed before, the data is highly imbalanced. The model would therefore tend to to predict the outcome that has the lager portion in the dataset (in this case, model will tend to predict "no"). If we directly apply this model to make prediction, the bank would be at risk of losing their potential client. To address this problem, we use SMOTE algorithm to oversample the minority class. SMOTE algorithm generates new data based on the distribution of features using K-nearest neighbor. After oversampling, the ratio between majority class (not subscribing) and minority class (subscribing) will become 4:1, which is much more balanced than the original ratio 8:1. With the help of SMOTE, the potential of logistic regression model and random forest model can be better exploited.
 
 ### 4.2 Logistic Regression
-The first model we used is the logistic regression model, we used the sigmoid function as activation to process data. With the help of the sklearn library, we can easily get our prediction. To judge the performance of our model, we used 10-fold cross-validation and generate the probability as our result. 
-Then we calculate the FPR and TPR respectively.
-To better compare the performance of the linear and nonlinear models, we set different penalty parameters. Here, L1, L2 are all implemented.
-And GridSearch method is used to search for the best parameter for this model.
+We first apply logistic regression to the data. To better compare the performance of the linear and nonlinear models, we set different penalty methods. Here we use L1 and  L2 norm as our penalty terms. To find the best parameter for this model, grid search is also applied. Besides, we use 10-fold cross-validation to avoid overfitting. Finally, we calculate the FPR and TPR respectively. 
+
 ### 4.3 Random Forest
-- Random forest is another method we choose to analyze our result. Due to its good performance to predict rare events, we believe Random Forest will give us a good prediction result.
-Random forests are an ensemble learning method for classification, regression, and other tasks that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean/average prediction (regression) of the individual trees. We generate about 500 trees in this model and we set the depth as 20.
+Next, we implement a random forest algorithm to the data to see its performance. As before, we use grid search to find the best hyperparameters (in this case, the number of trees and the max depth of each tree), and use 10-fold cross-validation to make predictions. After that, the FPR and TPR score will be calculated. 
+
 ### 4.4 Performance Analysis
-- After the model analysis, we get both the TPR and FPR from both models. 
-Here goes the visualization of our model and performance.
+To analyze the performance of the models, we plot the ROC curve
 #### 1.0 ROC Curve
 - The following ROC curve is drawn according to TPR and FPR data from these two models.
 The random forest can better predict our result with an accuracy of 90%, which is 10% percent better than linear regression.
