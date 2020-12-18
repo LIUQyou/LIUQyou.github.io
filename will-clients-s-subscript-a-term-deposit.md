@@ -18,12 +18,15 @@ subtitle: Using machine learning methods to predict whether a client will subscr
 3.2 Data Visualization and Feature Selection
 3.3 Unknown Filling
 3.4 Data Standardization
+
 #### 4. Model Implementation
 
 4.1 Data Oversample
 4.2 Logistic Regression
 4.3 Random Forest
-4.4 Performance Analysis
+
+#### Performance Comparision and Analysis
+#### Conclusion
 
 ## 1. Introduction
 
@@ -37,7 +40,7 @@ For this purpose, we proposed an extension project analyzing the performance of 
 - Is there a causal effect of a client subscribing to a bank term deposit?
 - What is the most important factor affecting a client subscription to a term deposit? Which clients are more likely to subscribe to a term deposit?
 
-The data story is organized as follows: Firstly, we will make a short description of our datasets, and introduce the methods used in preprocessing the data...????????
+The data story is organized as follows: In section II, we will make a short description of our datasets. Section III will introduce the methods used in preprocessing the data. Section IV will implements logistic regression and random forest to the data. Section V compares and analyzes the performance of the models. Finally, we will conclude our project in section VI.
 
 ## 2. Datasets
 
@@ -45,7 +48,6 @@ We collect the Bank Marketing Data Set from the UCI Machine Learning Repository.
  - Client's personal information: Age, job, marital status, education, loan status and so on;
  - Campaign activities: When and how to contact, the duration of the phone call;
  - Social and economic environment data: Employment variation rate, consumer price index, consumer confidence index, euribor 3 month rate, number of employees;
- - Other attributes: ????????
 
 The dataset is highly imbalanced since only a few people would make the bank term deposit. The ratio of accepting the subscription (‘yes’) and rejecting the proposal ('no') is roughly 1:8 in the datasets. In addition, there are missing values appeared in some attributes marked with "unknown", since some people are unwilling to disclose their private information to the bank. Therefore, before we apply the statistical models, we have to preprocess the data and select useful features, which is also referred to as feature engineering.
 
